@@ -63,9 +63,13 @@ enum ComponentTypeInfo: Equatable {
 }
 
 #if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
-  import Darwin
+  #if !arch(wasm32)
+    import Darwin
+  #endif
 #else
-  import Glibc
+  #if !arch(wasm32)
+    import Glibc
+  #endif
 #endif
 
 #if canImport(NIO)
